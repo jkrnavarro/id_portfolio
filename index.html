@@ -35,6 +35,7 @@
         const Mail = ({className}) => <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>;
         const Linkedin = ({className}) => <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>;
         const XIcon = ({className}) => <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>;
+        const MenuIcon = ({className}) => <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>;
 
         // --- MOCK DATA ---
         const PORTFOLIO_PROJECTS = [
@@ -76,6 +77,57 @@
           }
         ];
 
+        const LOGO_PROJECTS = [
+          {
+            id: 'logo1',
+            title: "TechFlow Startup Identity",
+            category: "Logo Design",
+            image: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?auto=format&fit=crop&w=800&q=80",
+            color: "bg-slate-100",
+            shortDesc: "A modern, minimalist logo mark for a SaaS technology company.",
+            tools: ["Adobe Illustrator", "Figma"],
+            challenge: "The client needed a brand identity that conveyed speed and data flow without using cliché arrows or clouds.",
+            solution: "Designed an abstract geometric mark utilizing continuous lines and a vibrant gradient to symbolize uninterrupted data streams.",
+            result: "Established a strong, recognizable brand presence that the client successfully used to secure Series A funding."
+          },
+          {
+            id: 'logo2',
+            title: "Apex Fitness Studio",
+            category: "Brand Identity",
+            image: "https://images.unsplash.com/photo-1555580399-ca40a3407886?auto=format&fit=crop&w=800&q=80",
+            color: "bg-red-50",
+            shortDesc: "Bold typography and emblem for a high-intensity interval training boutique.",
+            tools: ["Adobe Illustrator", "Adobe Photoshop"],
+            challenge: "The studio needed a logo that would stand out in a highly competitive local fitness market and translate well to physical merchandise.",
+            solution: "Created a bold, heavy-weight typographical mark combined with an 'A' emblem that doubles as a mountain peak.",
+            result: "The merchandise featuring the new logo sold out within the first month of the studio's grand opening."
+          },
+          {
+            id: 'logo3',
+            title: "Lumina Cafe",
+            category: "Logo Design",
+            image: "https://images.unsplash.com/photo-1629728471131-41940984de2a?auto=format&fit=crop&w=800&q=80",
+            color: "bg-amber-50",
+            shortDesc: "An elegant, warm logo design for an artisanal coffee shop and bakery.",
+            tools: ["Procreate", "Adobe Illustrator"],
+            challenge: "The cafe wanted to evoke a cozy, rustic feel while maintaining a clean, modern aesthetic for their packaging.",
+            solution: "Developed a custom hand-lettered logotype paired with a delicate sunburst icon, utilizing a warm earth-tone palette.",
+            result: "Significantly improved packaging aesthetic, leading to a 20% increase in retail coffee bag sales."
+          },
+          {
+            id: 'logo4',
+            title: "Nexus Consulting",
+            category: "Corporate Identity",
+            image: "https://images.unsplash.com/photo-1627843289052-a5e1ebdb767c?auto=format&fit=crop&w=800&q=80",
+            color: "bg-blue-50",
+            shortDesc: "A professional and trustworthy brand mark for a financial consulting firm.",
+            tools: ["Adobe Illustrator", "InDesign"],
+            challenge: "The firm required a rebrand that shifted their image from outdated to contemporary without losing their established trust and authority.",
+            solution: "Refined their existing color palette and designed an interlocking monolithic mark that represents security and partnership.",
+            result: "The rebrand was highly praised by existing stakeholders and helped attract a younger demographic of entrepreneurial clients."
+          }
+        ];
+
         const PROCESS_STEPS = [
           { phase: "Analyze", icon: <BarChart className="w-6 h-6 text-indigo-600" />, desc: "Conducting needs assessments, defining target audiences, and establishing measurable learning objectives." },
           { phase: "Design", icon: <PenTool className="w-6 h-6 text-indigo-600" />, desc: "Storyboarding, outlining content, selecting modalities, and mapping the instructional strategy." },
@@ -87,6 +139,7 @@
         function App() {
           const [activeTab, setActiveTab] = useState('home');
           const [selectedProject, setSelectedProject] = useState(null);
+          const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
           const renderContent = () => {
             switch (activeTab) {
@@ -103,12 +156,14 @@
               <nav className="sticky top-0 z-40 w-full bg-white border-b border-slate-200 shadow-sm">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="flex justify-between h-16 items-center">
-                    <div className="flex-shrink-0 flex items-center cursor-pointer group" onClick={() => setActiveTab('home')}>
+                    <div className="flex-shrink-0 flex items-center cursor-pointer group" onClick={() => { setActiveTab('home'); setIsMobileMenuOpen(false); }}>
                       <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xl group-hover:bg-indigo-700 transition-colors">
-                        ID
+                        JN
                       </div>
-                      <span className="ml-3 font-semibold text-xl tracking-tight text-slate-900">My Portfolio</span>
+                      <span className="ml-3 font-semibold text-xl tracking-tight text-slate-900">JK Navarro</span>
                     </div>
+                    
+                    {/* Desktop Menu */}
                     <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                       {['Home', 'Portfolio', 'Process', 'Contact'].map((tab) => (
                         <button
@@ -122,21 +177,45 @@
                         </button>
                       ))}
                     </div>
-                  </div>
-                  <div className="sm:hidden flex flex-wrap justify-center gap-2 py-3 border-t border-slate-100">
-                    {['Home', 'Portfolio', 'Process', 'Contact'].map((tab) => (
+
+                    {/* Hamburger Button (Mobile Only) */}
+                    <div className="flex items-center sm:hidden">
                       <button
-                        key={tab}
-                        onClick={() => setActiveTab(tab.toLowerCase())}
-                        className={`px-4 py-2 rounded-full text-sm font-medium transition-colors min-h-[44px] ${
-                          activeTab === tab.toLowerCase() ? 'bg-indigo-100 text-indigo-700' : 'text-slate-600 bg-slate-100 hover:bg-slate-200'
-                        }`}
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        className="inline-flex items-center justify-center p-2 rounded-md text-slate-500 hover:text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 transition-colors"
                       >
-                        {tab}
+                        <span className="sr-only">Open main menu</span>
+                        {isMobileMenuOpen ? (
+                          <XIcon className="block h-6 w-6" aria-hidden="true" />
+                        ) : (
+                          <MenuIcon className="block h-6 w-6" aria-hidden="true" />
+                        )}
                       </button>
-                    ))}
+                    </div>
                   </div>
                 </div>
+
+                {/* Drop-down Mobile Menu Panel */}
+                {isMobileMenuOpen && (
+                  <div className="sm:hidden border-t border-slate-100 bg-white absolute left-0 w-full shadow-lg">
+                    <div className="px-2 pt-2 pb-3 space-y-1">
+                      {['Home', 'Portfolio', 'Process', 'Contact'].map((tab) => (
+                        <button
+                          key={tab}
+                          onClick={() => {
+                            setActiveTab(tab.toLowerCase());
+                            setIsMobileMenuOpen(false); // Close menu on click
+                          }}
+                          className={`block w-full text-left px-3 py-3 rounded-md text-base font-medium ${
+                            activeTab === tab.toLowerCase() ? 'bg-indigo-50 text-indigo-700' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                          }`}
+                        >
+                          {tab}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </nav>
 
               <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12">
@@ -197,6 +276,11 @@
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900">Featured Projects</h2>
                 <p className="mt-4 text-base sm:text-lg text-slate-600">A selection of recent learning paths, framework trainings, and assessments designed to solve specific business problems.</p>
               </div>
+              
+              <div className="mb-6">
+                <h3 className="text-xl sm:text-2xl font-bold text-slate-800 border-b pb-2">Instructional Design</h3>
+              </div>
+              
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {PORTFOLIO_PROJECTS.map((project) => (
                   <div key={project.id} onClick={() => onSelectProject(project)} className="group bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-lg hover:border-indigo-300 transition-all cursor-pointer flex flex-col h-full">
@@ -210,6 +294,25 @@
                       <div className="flex items-center text-sm font-medium text-indigo-600 mt-auto">
                         View Project Details <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                       </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-16 mb-6">
+                <h3 className="text-xl sm:text-2xl font-bold text-slate-800 border-b pb-2">Logo & Brand Identity</h3>
+                <p className="mt-2 text-slate-600">A gallery of featured logos, brand marks, and identity systems.</p>
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                {LOGO_PROJECTS.map((logo) => (
+                  <div key={logo.id} onClick={() => onSelectProject(logo)} className="group bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-lg hover:border-indigo-300 transition-all cursor-pointer aspect-square relative flex items-center justify-center p-0">
+                    <img src={logo.image} alt={logo.title} className="w-full h-full object-cover relative z-10 transition-transform duration-500 group-hover:scale-105" />
+                    
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-slate-900/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-col items-center justify-center p-4 text-center">
+                      <span className="text-white font-bold text-sm sm:text-base mb-1">{logo.title}</span>
+                      <span className="text-indigo-200 text-xs uppercase tracking-wider">{logo.category}</span>
                     </div>
                   </div>
                 ))}
